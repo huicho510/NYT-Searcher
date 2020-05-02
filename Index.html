@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel='stylesheet' href='./assets/styles.css'>
+    <title>NY Times</title>
+    </head>
+
+    <body>
+        
+        <div class='jumbotron page-header'>
+            <h1 class="display text-center">New York Times</h1>
+        </div>
+        <div class= 'container'>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Search Terms:</label>
+              <input type="text" class="form-control" id="searchTerms">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Number of Records to Retrieve:</label>
+              <select class="custom-select" id="numberRecords" required>
+                <option selected disabled value="">Choose...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Start Year</label>
+              <input multiple class="form-control" id="startYear">
+                
+            </input>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">End Year</label>
+              <input class="form-control" id="endYear" rows="3"></input>
+            </div>
+            <button class='search' type="submit"><i class="fa fa-search"></i></button>
+           
+            <button onclick="document.getElementById('.form-group').value = ''">Clear Results</button>  
+          </form>
+         
+          <div class="card">
+            <div class="card-header">
+              Top Articles
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p></p>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+        </div>
+         
+         <nav class="navbar fixed-bottom navbar-light container ">
+            <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
+                <a class="navbar-text text-black"> Brought you by David.M & Luis.C &copy 2020</a>
+            </div>
+        </nav>
+    
+
+         <script>
+           let person = "";
+            let beginDate = "";
+            let endDate = "";
+            function searchPerson() {
+                let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+                 person + "&begin_date=" + 
+                 beginDate + "&end_date=" + 
+                 endDate + "&api-key=87e6d7e0-a629-4112-b8ea-b3b2b664e671";
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                    let $newArticle = $("<div>");
+                    $newArticle.text(response);
+                    $(".card-header").append($newArticle);
+                });
+            }
+            $(".search").on("click", function (event) {
+                event.preventDefault();
+                person = $("#searchTerms").text().trim();
+                beginDate = $("#startYear").text();
+                endDate = $("#endYear").text();
+                searchPerson();
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+    </html>

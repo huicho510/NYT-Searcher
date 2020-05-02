@@ -1,0 +1,31 @@
+.search {
+    background: #2196F3;
+    color: white;
+    width:5%;
+    font-size: 20px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  
+  }
+  body{
+      font-family:'Times New Roman', Times, serif;
+      
+  }
+  .display{
+      font-weight: bolder;
+      color: white;
+      font-size: 50px;
+  }
+  .jumbotron{
+    background-color: midnightblue;
+  }
+
+  label{
+     font-weight: bold;
+  }
+  .card-header{
+      font-weight: bold;
+      font-size: large;
+
+}
